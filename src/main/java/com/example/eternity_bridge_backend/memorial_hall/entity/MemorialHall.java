@@ -1,4 +1,4 @@
-package com.example.eternity_bridge_backend.memorial.entity;
+package com.example.eternity_bridge_backend.memorial_hall.entity;
 
 import com.example.eternity_bridge_backend.common.entity.BaseEntity;
 import jakarta.persistence.Entity;
@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class Memorial extends BaseEntity {
+public class MemorialHall extends BaseEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long petId;

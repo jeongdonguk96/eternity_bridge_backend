@@ -2,7 +2,7 @@ package com.example.eternity_bridge_backend.pet.repository;
 
 import com.example.eternity_bridge_backend.pet.dto.CreatePetRequest;
 import com.example.eternity_bridge_backend.pet.dto.GetPetsResponse;
-import com.example.eternity_bridge_backend.pet.dto.QGetMyPetsResponse;
+import com.example.eternity_bridge_backend.pet.dto.QGetPetsResponse;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 
@@ -19,7 +19,7 @@ public class PetRepositoryQuerydslImpl implements PetRepositoryQuerydsl {
     @Override
     public List<GetPetsResponse> findMyPets(Long memberId) {
         return queryFactory
-                .select(new QGetMyPetsResponse(
+                .select(new QGetPetsResponse(
                         pet.name,
                         pet.nickname,
                         pet.petType,
