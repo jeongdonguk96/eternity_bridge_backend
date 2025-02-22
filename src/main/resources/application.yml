@@ -12,9 +12,9 @@ spring:
 
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url:
-    username:
-    password:
+    url: jdbc:mariadb://localhost:33061/eternity_bridge?characterEncoding=UTF-8
+    username: donguk
+    password: 1234
     minimum-idle: 10
     maximum-pool-size: 10
 
