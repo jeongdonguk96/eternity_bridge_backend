@@ -1,6 +1,6 @@
 package com.example.eternity_bridge_backend.item.entity;
 
-import com.example.eternity_bridge_backend.common.BaseEntity;
+import com.example.eternity_bridge_backend.common.entity.BaseEntity;
 import com.example.eternity_bridge_backend.pet.enums.ItemType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

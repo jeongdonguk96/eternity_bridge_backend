@@ -1,6 +1,6 @@
 package com.example.eternity_bridge_backend.pet.entity;
 
-import com.example.eternity_bridge_backend.common.BaseEntity;
+import com.example.eternity_bridge_backend.common.entity.BaseEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,5 +26,5 @@ public class Pet extends BaseEntity {
     private String deathDate;
     private String profileImageUrl;
     private String dotImageUrl;
-    private Long personId;
+    private Long memberId;
 }
