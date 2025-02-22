@@ -1,4 +1,4 @@
-package com.example.eternity_bridge_backend.common;
+package com.example.eternity_bridge_backend.common.entity;
 
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
