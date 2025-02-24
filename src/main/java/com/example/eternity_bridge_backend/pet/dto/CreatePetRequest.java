@@ -22,6 +22,7 @@ public record CreatePetRequest(
                 .deathDate(this.deathDate)
                 .profileImageUrl(this.profileImageUrl)
                 .dotImageUrl(this.dotImageUrl)
+                .memberId(memberId)
                 .build();
     }
 }
