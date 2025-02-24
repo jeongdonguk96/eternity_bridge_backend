@@ -1,6 +1,7 @@
 package com.example.eternity_bridge_backend.memorial_hall.repository;
 
 import com.example.eternity_bridge_backend.common.enums.CustomSort;
+import com.example.eternity_bridge_backend.memorial_hall.dto.CreateMemorialHallRequest;
 import com.example.eternity_bridge_backend.memorial_hall.dto.GetMemorialHallsResponse;
 import com.example.eternity_bridge_backend.memorial_hall.dto.QGetMemorialHallsResponse;
 import com.querydsl.core.types.OrderSpecifier;
@@ -44,6 +45,14 @@ public class MemorialHallRepositoryQuerydslImpl implements MemorialHallRepositor
                 .fetch();
 
         return checkLastPage(pageable, memorialList);
+    }
+
+    @Override
+    public boolean checkDuplicatedMemorialHall(CreateMemorialHallRequest request, Long memberId) {
+        return queryFactory.selectOne()
+                .from(memorialHall)
+                .where(memorialHall.petId.eq(request.petId()))
+                .fetchFirst() != null;
     }
 
 
