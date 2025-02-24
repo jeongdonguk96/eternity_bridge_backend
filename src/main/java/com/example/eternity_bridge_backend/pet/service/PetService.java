@@ -32,7 +32,7 @@ public class PetService {
 
 
     // 강아지를 조회한다.
-    public Pet findById(Long id) {
+    public Pet getPet(Long id) {
         return petRepository.findById(id).orElseThrow(
                 () -> new CommonException(PetErrorCode.PET_NOT_FOUND));
     }

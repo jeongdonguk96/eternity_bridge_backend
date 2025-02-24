@@ -37,7 +37,7 @@ public class PetController {
     public CommonResult getPet(
             @PathVariable(name = "petId") Long petId
     ) {
-        return responseService.getSingleResult(petService.findById(petId));
+        return responseService.getSingleResult(petService.getPet(petId));
     }
 
 
