@@ -1,4 +1,4 @@
-package com.example.eternity_bridge_backend.common.enums;
+package com.example.eternity_bridge_backend.memorial_hall.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
