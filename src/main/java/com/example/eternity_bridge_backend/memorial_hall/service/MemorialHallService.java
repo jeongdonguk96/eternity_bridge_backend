@@ -1,7 +1,7 @@
 package com.example.eternity_bridge_backend.memorial_hall.service;
 
 import com.example.eternity_bridge_backend.common.dto.CursorResult;
-import com.example.eternity_bridge_backend.common.enums.CustomSort;
+import com.example.eternity_bridge_backend.memorial_hall.enums.CustomSort;
 import com.example.eternity_bridge_backend.exception.exception.CommonException;
 import com.example.eternity_bridge_backend.memorial_hall.dto.CreateMemorialHallRequest;
 import com.example.eternity_bridge_backend.memorial_hall.dto.GetMemorialHallsResponse;
