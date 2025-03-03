@@ -6,8 +6,8 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum CustomSort {
-    ASC("ASC"),
-    DESC("DESC"),
+    OLDEST("OLDEST"),
+    LATEST("LATEST"),
     VIEWS("VIEWS"),
     POPULARITY("POPULARITY"),
     ;

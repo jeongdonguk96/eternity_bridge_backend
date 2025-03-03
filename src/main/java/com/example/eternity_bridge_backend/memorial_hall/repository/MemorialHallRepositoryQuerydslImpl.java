@@ -1,6 +1,5 @@
 package com.example.eternity_bridge_backend.memorial_hall.repository;
 
-import com.example.eternity_bridge_backend.memorial_hall.enums.CustomSort;
 import com.example.eternity_bridge_backend.memorial_hall.dto.CreateMemorialHallRequest;
 import com.example.eternity_bridge_backend.memorial_hall.dto.GetMemorialHallsResponse;
 import com.example.eternity_bridge_backend.memorial_hall.dto.QGetMemorialHallsResponse;
@@ -24,7 +23,7 @@ public class MemorialHallRepositoryQuerydslImpl implements MemorialHallRepositor
 
 
     @Override
-    public Slice<GetMemorialHallsResponse> findAllByCursorId(Long cursorId, CustomSort sort, Pageable pageable) {
+    public Slice<GetMemorialHallsResponse> findAllByCursorId(Long cursorId, String sort, Pageable pageable) {
         List<GetMemorialHallsResponse> memorialList = queryFactory.select(new QGetMemorialHallsResponse(
                         memorialHall.id,
                         pet.id,
@@ -57,24 +56,24 @@ public class MemorialHallRepositoryQuerydslImpl implements MemorialHallRepositor
 
 
     // cursorId의 여부를 확인한 다음, 조회 기준에 따라 데이터를 반환한다.
-    private BooleanExpression getCursorCondition(Long cursorId, CustomSort sort) {
+    private BooleanExpression getCursorCondition(Long cursorId, String sort) {
         if (cursorId == null) {
             return null;
         }
 
-        return switch (sort) {
-            case ASC -> memorialHall.id.gt(cursorId);
-            case DESC -> memorialHall.id.lt(cursorId);
+        return switch (sort.toUpperCase()) {
+            case "OLDEST" -> memorialHall.id.gt(cursorId);
+            case "LATEST" -> memorialHall.id.lt(cursorId);
             default -> null;
         };
     }
 
 
     // 정렬 기준에 따라 데이터를 정렬한다.
-    private OrderSpecifier<?> getOrderSpecifier(CustomSort sort) {
-        return switch (sort) {
-            case ASC -> memorialHall.id.asc();
-            case DESC -> memorialHall.id.desc();
+    private OrderSpecifier<?> getOrderSpecifier(String sort) {
+        return switch (sort.toUpperCase()) {
+            case "OLDEST" -> memorialHall.id.asc();
+            case "LATEST" -> memorialHall.id.desc();
             default -> null;
         };
     }
