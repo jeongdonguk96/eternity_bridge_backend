@@ -1,9 +1,11 @@
 package com.example.eternity_bridge_backend.common.service;
 
 import com.example.eternity_bridge_backend.common.dto.CommonResult;
+import com.example.eternity_bridge_backend.common.dto.CursorResult;
 import com.example.eternity_bridge_backend.common.dto.ListResult;
 import com.example.eternity_bridge_backend.common.dto.SingleResult;
 import com.example.eternity_bridge_backend.exception.exception.CommonException;
+import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,6 +25,16 @@ public class ResponseService {
     public <T> ListResult<T> getListResult(List<T> dataList) {
         ListResult<T> result = new ListResult<>();
         result.setDataList(dataList);
+        result.setSuccessResult();
+
+        return result;
+    }
+
+
+    public <T> CursorResult<T> getCursorResult(Slice<T> dataList, Boolean hasNext) {
+        CursorResult<T> result = new CursorResult<>();
+        result.setValueList(dataList);
+        result.setHasNext(hasNext);
         result.setSuccessResult();
 
         return result;
