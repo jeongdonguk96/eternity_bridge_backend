@@ -3,8 +3,6 @@ package com.example.eternity_bridge_backend.image.service;
 import com.example.eternity_bridge_backend.image.entity.Image;
 import com.example.eternity_bridge_backend.image.enums.ImageDomain;
 import com.example.eternity_bridge_backend.image.repository.ImageRepository;
-import com.example.eternity_bridge_backend.utils.CommonUtils;
-import com.example.eternity_bridge_backend.utils.DateUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.MDC;
@@ -37,16 +35,6 @@ public class ImageService {
         log.info("[{}] 이미지 저장 성공", trxKey);
 
         return image.getUrl();
-    }
-
-
-    // 파일명을 재조합한다.
-    private String extractFilename(ImageDomain domain, Long memberId, MultipartFile files) {
-        String fullCurrentMonth = DateUtils.getFullCurrentMonth();
-        String originalFilename = files.getOriginalFilename();
-        String randomNumber = CommonUtils.generateRandom4Digit();
-
-        return String.format("%d/%s/%s/%s-%s", memberId, domain, fullCurrentMonth, originalFilename, randomNumber);
     }
 
 }

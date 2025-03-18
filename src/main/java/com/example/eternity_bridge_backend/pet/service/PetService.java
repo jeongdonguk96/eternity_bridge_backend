@@ -7,6 +7,8 @@ import com.example.eternity_bridge_backend.pet.dto.GetPetsResponse;
 import com.example.eternity_bridge_backend.pet.entity.Pet;
 import com.example.eternity_bridge_backend.pet.repository.PetRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.MDC;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +18,7 @@ import java.util.Optional;
 import static com.example.eternity_bridge_backend.exception.code.PetErrorCode.DUPLICATED_PET;
 
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class PetService {
@@ -26,8 +29,12 @@ public class PetService {
     // 반려동물을 등록한다.
     @Transactional
     public void createPet(CreatePetRequest request, Long memberId) {
-        checkDuplicatedPet(request, memberId);
+        String trxKey = MDC.get("trxKey");
+        checkDuplicatedPet(request, memberId, trxKey);
+        log.info("[{}] 반려동물 등록 전 중복체크 결과 => 중복없음", trxKey);
+
         petRepository.save(request.from(memberId));
+        log.info("[{}] 반려동물 등록 성공", trxKey);
     }
 
 
@@ -40,15 +47,21 @@ public class PetService {
 
     // 사용자의 반려동물을 조회한다.
     public List<GetPetsResponse> getMyPets(Long memberId) {
+        String trxKey = MDC.get("trxKey");
         return Optional.ofNullable(petRepository.findMyPets(memberId))
-                .filter(pets -> !pets.isEmpty())
+                .filter(pets -> {
+                    boolean hasPets = !pets.isEmpty();
+                    log.info("[{}] 등록된 반려동물이 {}.", trxKey, hasPets ? "있음" : "없음");
+                    return hasPets;
+                })
                 .orElseThrow(() -> new CommonException(PetErrorCode.MEMBER_HAS_NO_PETS));
     }
 
 
     // 반려동물 등록 시 중복체크를 진행한다.
-    private void checkDuplicatedPet(CreatePetRequest request, Long memberId) {
+    private void checkDuplicatedPet(CreatePetRequest request, Long memberId, String trxKey) {
         if (petRepository.checkDuplicatedPet(request, memberId)) {
+            log.info("[{}] 반려동물 등록 전 중복체크 결과 => 중복있음", trxKey);
             throw new CommonException(DUPLICATED_PET);
         }
     }

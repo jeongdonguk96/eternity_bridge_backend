@@ -45,7 +45,7 @@ class MemorialHallServiceTest extends AbstractTest {
         createDummyMemorialHall();
 
         // when
-        CursorResult<GetMemorialHallsResponse> memorialHallList = memorialHallService.getMemorialHalls(180L, CustomSort.DESC, PageRequest.of(0, 10));
+        CursorResult<GetMemorialHallsResponse> memorialHallList = memorialHallService.getMemorialHallsBySlice(180L, CustomSort.DESC, PageRequest.of(0, 10));
 
         // then
         for (GetMemorialHallsResponse memorialHallsResponse : memorialHallList.getValueList()) {
