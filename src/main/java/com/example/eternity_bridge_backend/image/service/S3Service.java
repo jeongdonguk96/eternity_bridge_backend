@@ -26,10 +26,13 @@ public class S3Service {
 
 
     // 단일 파일을 S3에 업로드한다.
-    public String upload(MultipartFile file, ImageDomain domain, Long memberId) throws IOException {
+    public String upload(MultipartFile file, ImageDomain domain, Long memberId, String trxKey) throws IOException {
         String fileName = extractFilename(domain, memberId, file);
+        log.info("[{}] S3 업로드 경로 = {}", trxKey, fileName);
+
         ObjectMetadata metadata = setObjectMetadata(file);
         amazonS3Client.putObject(BUCKET, fileName, file.getInputStream(), metadata);
+        log.info("[{}] S3 업로드 성공", trxKey);
 
         return fileName;
     }
