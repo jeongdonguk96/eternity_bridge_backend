@@ -27,7 +27,7 @@ public class MemorialHallController {
     private final ResponseService responseService;
 
 
-    // 추모관을 등록한다.
+    // 추모관을 생성한다.
     @PostMapping()
     public CommonResult createMemorialHall(
             @RequestBody CreateMemorialHallRequest request
@@ -40,11 +40,11 @@ public class MemorialHallController {
 
     // 커서 기반 슬라이스 방식으로 추모관을 조회한다.
     @GetMapping()
-    public CursorResult<GetMemorialHallsResponse> getSlice(
+    public CursorResult<GetMemorialHallsResponse> getMemorialHallsBySlice(
             @RequestParam(value = "cursorId", required = false) Long cursorId,
             @RequestParam(value = "sort", defaultValue = "desc") CustomSort sort
     ) {
-        return memorialHallService.getMemorialHalls(cursorId, sort, PageRequest.of(0, DEFAULT_SIZE));
+        return memorialHallService.getMemorialHallsBySlice(cursorId, sort, PageRequest.of(0, DEFAULT_SIZE));
     }
 
 }
