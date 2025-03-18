@@ -21,7 +21,7 @@ public class PetController {
     private final ResponseService responseService;
 
 
-    // 강아지를 등록한다.
+    // 반려동물을 등록한다.
     @PostMapping()
     public CommonResult createPet(
             @RequestBody CreatePetRequest request
@@ -32,7 +32,7 @@ public class PetController {
     }
 
 
-    // 강아지를 조회한다.
+    // 반려동물을 조회한다.
     @GetMapping("/{petId}")
     public CommonResult getPet(
             @PathVariable(name = "petId") Long petId
@@ -41,7 +41,7 @@ public class PetController {
     }
 
 
-    // 사용자의 강아지를 조회한다.
+    // 사용자의 반려동물을 조회한다.
     @GetMapping("/my-pets")
     public CommonResult getMyPets() {
         Long memberId = 1L;

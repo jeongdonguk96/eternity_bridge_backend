@@ -19,7 +19,7 @@ class PetServiceTest extends AbstractTest {
 
 
     @Test
-    @DisplayName("강아지가 정상적으로 등록된다.")
+    @DisplayName("반려동물이 정상적으로 등록된다.")
     void createPetTest() {
         // given
         Long memberId = 1L;
@@ -35,7 +35,7 @@ class PetServiceTest extends AbstractTest {
 
 
     @Test
-    @DisplayName("강아지가 정상적으로 조회된다.")
+    @DisplayName("반려동물이 정상적으로 조회된다.")
     void getPetTest() {
         // given
         Long memberId = 1L;
@@ -54,7 +54,7 @@ class PetServiceTest extends AbstractTest {
 
 
     @Test
-    @DisplayName("사용자의 강아지가 정상적으로 조회된다.")
+    @DisplayName("사용자의 반려동물이 정상적으로 조회된다.")
     void getMyPetsTest() {
         // given
         Long memberId1 = 1L;

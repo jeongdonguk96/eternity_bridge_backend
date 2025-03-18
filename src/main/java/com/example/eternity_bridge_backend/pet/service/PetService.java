@@ -23,7 +23,7 @@ public class PetService {
     private final PetRepository petRepository;
 
 
-    // 강아지를 등록한다.
+    // 반려동물을 등록한다.
     @Transactional
     public void createPet(CreatePetRequest request, Long memberId) {
         checkDuplicatedPet(request, memberId);
@@ -31,14 +31,14 @@ public class PetService {
     }
 
 
-    // 강아지를 조회한다.
+    // 반려동물을 조회한다.
     public Pet getPet(Long id) {
         return petRepository.findById(id).orElseThrow(
                 () -> new CommonException(PetErrorCode.PET_NOT_FOUND));
     }
 
 
-    // 사용자의 강아지를 조회한다.
+    // 사용자의 반려동물을 조회한다.
     public List<GetPetsResponse> getMyPets(Long memberId) {
         return Optional.ofNullable(petRepository.findMyPets(memberId))
                 .filter(pets -> !pets.isEmpty())
@@ -46,7 +46,7 @@ public class PetService {
     }
 
 
-    // 강아지 등록 시 중복체크를 진행한다.
+    // 반려동물 등록 시 중복체크를 진행한다.
     private void checkDuplicatedPet(CreatePetRequest request, Long memberId) {
         if (petRepository.checkDuplicatedPet(request, memberId)) {
             throw new CommonException(DUPLICATED_PET);
