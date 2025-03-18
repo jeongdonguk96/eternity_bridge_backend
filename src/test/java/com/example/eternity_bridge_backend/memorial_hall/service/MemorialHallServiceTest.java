@@ -1,4 +1,4 @@
-package com.example.eternity_bridge_backend.memorial_hall.controller;
+package com.example.eternity_bridge_backend.memorial_hall.service;
 
 import com.example.eternity_bridge_backend.common.AbstractTest;
 import com.example.eternity_bridge_backend.common.dto.CursorResult;
@@ -14,7 +14,7 @@ import org.springframework.data.domain.PageRequest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class MemorialHallControllerTest extends AbstractTest {
+class MemorialHallServiceTest extends AbstractTest {
 
     @Autowired EntityManager em;
 
