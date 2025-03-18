@@ -1,5 +1,7 @@
 package com.example.eternity_bridge_backend.image.controller;
 
+import com.example.eternity_bridge_backend.common.dto.CommonResult;
+import com.example.eternity_bridge_backend.common.service.ResponseService;
 import com.example.eternity_bridge_backend.image.enums.ImageDomain;
 import com.example.eternity_bridge_backend.image.service.ImageService;
 import lombok.RequiredArgsConstructor;
@@ -19,16 +21,17 @@ import java.io.IOException;
 public class ImageController {
 
     private final ImageService imageService;
+    private final ResponseService responseService;
 
 
     // S3에 이미지 파일을 업로드하고 DB에 이미지 데이터를 생성한다.
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public String createImage(
+    public CommonResult createImage(
             @RequestPart(name = "file") MultipartFile file,
             @RequestParam(name = "domain") ImageDomain domain
     ) throws IOException {
         Long memberId = 1L;
-        return imageService.createImage(file, domain, memberId);
+        return responseService.getSingleResult(imageService.createImage(file, domain, memberId));
     }
 
 }
