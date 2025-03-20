@@ -51,6 +51,10 @@ dependencies {
     // AWS
     implementation 'javax.xml.bind:jaxb-api:2.3.1'
     implementation 'io.awspring.cloud:spring-cloud-starter-aws-secrets-manager-config:2.4.4'
+
+    // Oauth2
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.security:spring-security-oauth2-client'
 }
 
 // Querydsl 설정부
