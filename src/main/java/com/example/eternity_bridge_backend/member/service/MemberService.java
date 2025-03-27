@@ -20,6 +20,10 @@ public class MemberService {
     // OAuth 회원의 회원가입을 진행한다.
     @Transactional
     public Member singUp(OAuth2 oAuth2) {
+        if (isDuplicatedEmail(oAuth2.getEmail())) {
+            throw new CommonException(MemberErrorCode.DUPLICATED_EMAIL);
+        }
+
         Member newMember = oAuth2.from(oAuth2);
         return memberRepository.save(newMember);
     }

@@ -33,13 +33,13 @@ public class OAuth2UserService extends DefaultOAuth2UserService {
         OAuth2Provider provider = OAuth2Provider.valueOf(userRequest.getClientRegistration().getRegistrationId());
         OAuth2 oAuth2 = null;
         switch (provider) {
-            case KAKAO -> oAuth2 = new KakaoOAuth2(attributes);
+            case kakao -> oAuth2 = new KakaoOAuth2(attributes);
         }
 
         Member member = memberService.findByEmail(oAuth2.getEmail());
 
         if (Objects.isNull(member)) {
-            memberService.singUp(oAuth2);
+            member = memberService.singUp(oAuth2);
         }
 
         return new PrincipalDetails(member, attributes);

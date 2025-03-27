@@ -26,9 +26,8 @@ public class SecurityConfig {
                 .sessionManagement(sessionManagement ->
                         sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .oauth2Login(oauth2Login ->
-                        oauth2Login.loginPage("/api/oauth2/login")
-                                .userInfoEndpoint(userInfoEndpoint ->
-                                        userInfoEndpoint.userService(oAuth2UserService)))
+                        oauth2Login.userInfoEndpoint(userInfoEndpoint ->
+                                userInfoEndpoint.userService(oAuth2UserService)))
                 .authorizeHttpRequests(authorizeRequest ->
                         authorizeRequest
                                 .anyRequest().permitAll()

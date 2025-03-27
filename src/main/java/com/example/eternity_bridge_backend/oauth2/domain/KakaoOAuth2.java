@@ -6,7 +6,6 @@ import com.example.eternity_bridge_backend.member.entity.Member;
 import java.util.Map;
 
 public class KakaoOAuth2 implements OAuth2 {
-
     private Map<String, Object> attributes;
 
     public KakaoOAuth2(Map<String, Object> attributes) {
@@ -20,18 +19,14 @@ public class KakaoOAuth2 implements OAuth2 {
 
     @Override
     public String getEmail() {
-        return (String) attributes.get("email");
-    }
-
-    @Override
-    public String getName() {
-        return (String) attributes.get("name");
+        Map<String, Object> kakaoAccount = (Map<String, Object>) attributes.get("kakao_account");
+        return (String) kakaoAccount.get("email");
     }
 
     @Override
     public Member from(OAuth2 oAuth2) {
         return Member.builder()
-                .name(oAuth2.getName())
+                .email(oAuth2.getEmail())
                 .provider(oAuth2.getProvider())
                 .build();
     }
