@@ -63,8 +63,8 @@ cloud:
     stack:
       auto: false
     credentials:
-      access-key: AKIA3DZQBRCDDZ4QJODB
-      secret-key: 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
+      access-key:
+      secret-key:
 
 ---
 spring:
