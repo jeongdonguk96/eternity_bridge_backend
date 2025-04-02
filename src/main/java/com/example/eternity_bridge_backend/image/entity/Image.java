@@ -56,4 +56,9 @@ public class Image extends BaseEntity {
     public void modifyDomainId(Long domainId) {
         this.domainId = domainId;
     }
+
+
+    public void modifyUrl(String url) {
+        this.url = url;
+    }
 }

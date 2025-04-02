@@ -7,7 +7,6 @@ import com.example.eternity_bridge_backend.member.repository.MemberRepository;
 import com.example.eternity_bridge_backend.oauth2.domain.OAuth2;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
@@ -18,7 +17,6 @@ public class MemberService {
 
 
     // OAuth 회원의 회원가입을 진행한다.
-    @Transactional
     public Member singUp(OAuth2 oAuth2) {
         if (isDuplicatedEmail(oAuth2.getEmail())) {
             throw new CommonException(MemberErrorCode.DUPLICATED_EMAIL);

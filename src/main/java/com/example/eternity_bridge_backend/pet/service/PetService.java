@@ -2,6 +2,7 @@ package com.example.eternity_bridge_backend.pet.service;
 
 import com.example.eternity_bridge_backend.exception.code.PetErrorCode;
 import com.example.eternity_bridge_backend.exception.exception.CommonException;
+import com.example.eternity_bridge_backend.image.service.ImageService;
 import com.example.eternity_bridge_backend.pet.dto.CreatePetRequest;
 import com.example.eternity_bridge_backend.pet.dto.GetPetsResponse;
 import com.example.eternity_bridge_backend.pet.entity.Pet;
@@ -15,14 +16,13 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-import static com.example.eternity_bridge_backend.exception.code.PetErrorCode.DUPLICATED_PET;
-
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class PetService {
 
+    private final ImageService imageService;
     private final PetRepository petRepository;
 
 
@@ -30,11 +30,15 @@ public class PetService {
     @Transactional
     public void createPet(CreatePetRequest request, Long memberId) {
         String trxKey = MDC.get("trxKey");
+
         checkDuplicatedPet(request, memberId, trxKey);
         log.info("[{}] 반려동물 등록 전 중복체크 결과 => 중복없음", trxKey);
 
-        petRepository.save(request.from(memberId));
+        Pet pet = petRepository.save(request.from(memberId));
         log.info("[{}] 반려동물 등록 성공", trxKey);
+
+        imageService.modifyDomainId(pet.getProfileImageUrl(), memberId, pet.getId());
+        log.info("[{}] 이미지 엔티티의 도메인 ID 변경 성공", trxKey);
     }
 
 
@@ -48,6 +52,7 @@ public class PetService {
     // 사용자의 반려동물을 조회한다.
     public List<GetPetsResponse> getMyPets(Long memberId) {
         String trxKey = MDC.get("trxKey");
+
         return Optional.ofNullable(petRepository.findMyPets(memberId))
                 .filter(pets -> {
                     boolean hasPets = !pets.isEmpty();
@@ -62,7 +67,7 @@ public class PetService {
     private void checkDuplicatedPet(CreatePetRequest request, Long memberId, String trxKey) {
         if (petRepository.checkDuplicatedPet(request, memberId)) {
             log.info("[{}] 반려동물 등록 전 중복체크 결과 => 중복있음", trxKey);
-            throw new CommonException(DUPLICATED_PET);
+            throw new CommonException(PetErrorCode.DUPLICATED_PET);
         }
     }
 

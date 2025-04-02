@@ -11,7 +11,7 @@ import org.springframework.data.domain.Slice;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CursorResult<T> extends CommonResult {
+public class SliceResult<T> extends CommonResult {
     Slice<T> valueList;
     Boolean hasNext;
 }

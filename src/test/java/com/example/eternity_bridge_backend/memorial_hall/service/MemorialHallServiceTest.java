@@ -1,7 +1,7 @@
 package com.example.eternity_bridge_backend.memorial_hall.service;
 
 import com.example.eternity_bridge_backend.common.AbstractTest;
-import com.example.eternity_bridge_backend.common.dto.CursorResult;
+import com.example.eternity_bridge_backend.common.dto.SliceResult;
 import com.example.eternity_bridge_backend.memorial_hall.dto.CreateMemorialHallRequest;
 import com.example.eternity_bridge_backend.memorial_hall.dto.GetMemorialHallsResponse;
 import com.example.eternity_bridge_backend.memorial_hall.enums.CustomSort;
@@ -45,7 +45,7 @@ class MemorialHallServiceTest extends AbstractTest {
         createDummyMemorialHall();
 
         // when
-        CursorResult<GetMemorialHallsResponse> memorialHallList = memorialHallService.getMemorialHallsBySlice(180L, CustomSort.DESC, PageRequest.of(0, 10));
+        SliceResult<GetMemorialHallsResponse> memorialHallList = memorialHallService.getMemorialHallsBySlice(180L, CustomSort.LATEST, PageRequest.of(0, 10));
 
         // then
         for (GetMemorialHallsResponse memorialHallsResponse : memorialHallList.getValueList()) {
