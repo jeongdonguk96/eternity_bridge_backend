@@ -6,6 +6,7 @@ import com.example.eternity_bridge_backend.image.enums.ImageDomain;
 import com.example.eternity_bridge_backend.image.service.ImageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
+@CrossOrigin(value = "*")
 @RestController
 @RequestMapping("/api/images")
 @RequiredArgsConstructor

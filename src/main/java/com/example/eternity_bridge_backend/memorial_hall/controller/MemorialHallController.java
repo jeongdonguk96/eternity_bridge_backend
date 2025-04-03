@@ -11,6 +11,7 @@ import com.example.eternity_bridge_backend.memorial_hall.enums.CustomSort;
 import com.example.eternity_bridge_backend.memorial_hall.service.MemorialHallService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+@CrossOrigin(value = "*")
 @RestController
 @RequestMapping("/api/memorials")
 @RequiredArgsConstructor
@@ -45,7 +47,7 @@ public class MemorialHallController {
     @GetMapping()
     public SliceResult<GetMemorialHallsResponse> getMemorialHallsBySlice(
             @RequestParam(value = "cursorValue", required = false) Long cursorValue,
-            @RequestParam(value = "sort", defaultValue = "desc") CustomSort sort
+            @RequestParam(value = "sort", defaultValue = "latest") CustomSort sort
     ) {
         return responseService.getSliceResult(memorialHallService.getMemorialHallsBySlice(cursorValue, sort, PageRequest.of(0, DEFAULT_SIZE)));
     }
