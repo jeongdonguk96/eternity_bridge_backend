@@ -125,9 +125,9 @@ public class MemorialHallRepositoryQuerydslImpl implements MemorialHallRepositor
         }
 
         return switch (sort) {
-            case ASC -> memorialHall.id.gt(cursorValue);
-            case DESC -> memorialHall.id.lt(cursorValue);
-            case VIEWS -> memorialHall.viewCount.lt(cursorValue);
+            case oldest -> memorialHall.id.gt(cursorValue);
+            case latest -> memorialHall.id.lt(cursorValue);
+            case views -> memorialHall.viewCount.lt(cursorValue);
             default -> null;
         };
     }
@@ -136,9 +136,9 @@ public class MemorialHallRepositoryQuerydslImpl implements MemorialHallRepositor
     // 정렬 기준에 따라 데이터를 정렬한다.
     private OrderSpecifier<?> getOrderSpecifier(CustomSort sort) {
         return switch (sort) {
-            case ASC -> memorialHall.id.asc();
-            case DESC -> memorialHall.id.desc();
-            case VIEWS -> memorialHall.viewCount.desc();
+            case oldest -> memorialHall.id.asc();
+            case latest -> memorialHall.id.desc();
+            case views -> memorialHall.viewCount.desc();
             default -> null;
         };
     }

@@ -45,7 +45,7 @@ class MemorialHallServiceTest extends AbstractTest {
         createDummyMemorialHall();
 
         // when
-        SliceResult<GetMemorialHallsResponse> memorialHallList = memorialHallService.getMemorialHallsBySlice(180L, CustomSort.LATEST, PageRequest.of(0, 10));
+        SliceResult<GetMemorialHallsResponse> memorialHallList = memorialHallService.getMemorialHallsBySlice(180L, CustomSort.latest, PageRequest.of(0, 10));
 
         // then
         for (GetMemorialHallsResponse memorialHallsResponse : memorialHallList.getValueList()) {
