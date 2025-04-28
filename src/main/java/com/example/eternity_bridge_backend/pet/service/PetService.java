@@ -28,7 +28,7 @@ public class PetService {
 
     // 반려동물을 등록한다.
     @Transactional
-    public void createPet(CreatePetRequest request, Long memberId) {
+    public Long createPet(CreatePetRequest request, Long memberId) {
         String trxKey = MDC.get("trxKey");
 
         checkDuplicatedPet(request, memberId, trxKey);
@@ -39,6 +39,8 @@ public class PetService {
 
         imageService.modifyDomainId(pet.getProfileImageUrl(), memberId, pet.getId());
         log.info("[{}] 이미지 엔티티의 도메인 ID 변경 성공", trxKey);
+
+        return pet.getId();
     }
 
 

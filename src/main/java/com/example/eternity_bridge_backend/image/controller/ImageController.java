@@ -1,6 +1,7 @@
 package com.example.eternity_bridge_backend.image.controller;
 
 import com.example.eternity_bridge_backend.common.dto.CommonResult;
+import com.example.eternity_bridge_backend.common.dto.SingleResult;
 import com.example.eternity_bridge_backend.common.service.ResponseService;
 import com.example.eternity_bridge_backend.image.enums.ImageDomain;
 import com.example.eternity_bridge_backend.image.service.ImageService;
@@ -30,7 +31,7 @@ public class ImageController {
 
     // S3에 이미지 파일을 업로드하고 DB에 이미지 데이터를 생성한다.
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public CommonResult createImage(
+    public SingleResult<String> createImage(
             @RequestPart(name = "file") MultipartFile file,
             @RequestParam(name = "domain") ImageDomain domain
     ) throws IOException {
@@ -41,7 +42,7 @@ public class ImageController {
 
     // S3에 이미지 파일을 업데이트하고 DB에 이미지 데이터를 변경한다. (재등록)
     @PostMapping(value = "/retry", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public CommonResult reCreateImage(
+    public SingleResult<String> reCreateImage(
             @RequestPart(name = "file") MultipartFile file,
             @RequestParam(name = "domain") ImageDomain domain,
             @RequestParam(name = "oldUrl") String oldUrl
@@ -53,7 +54,7 @@ public class ImageController {
 
     // S3에 이미지 파일을 업로드하고 DB에 이미지 데이터를 생성한다. (변경)
     @PutMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public CommonResult modifyImage(
+    public SingleResult<String> modifyImage(
             @RequestPart(name = "file") MultipartFile file,
             @PathVariable(name = "id") Long id
     ) throws IOException {
