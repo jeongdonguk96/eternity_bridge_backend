@@ -42,9 +42,7 @@ public class MemorialHallService {
         String trxKey = MDC.get("trxKey");
 
         Slice<GetMemorialHallsResponse> memorialHallList = memorialHallRepository.findAllByCursorValue(cursorValue, sort, pageable);
-        Boolean hasNext = memorialHallList.isEmpty()
-                ? null
-                : memorialHallList.hasNext();
+        boolean hasNext = !memorialHallList.isEmpty();
 
         log.info("[{}] 조회된 추모관 목록 {}개", trxKey, memorialHallList.getNumberOfElements());
         log.info("[{}] hasNext 여부 = {}", trxKey, hasNext);

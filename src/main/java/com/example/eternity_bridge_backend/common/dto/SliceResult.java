@@ -13,5 +13,5 @@ import org.springframework.data.domain.Slice;
 @AllArgsConstructor
 public class SliceResult<T> extends CommonResult {
     Slice<T> valueList;
-    Boolean hasNext;
+    boolean hasNext;
 }
